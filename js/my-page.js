@@ -1,7 +1,7 @@
 $(document).ready(() => {
 
-    SDK.Users.loadNav();
-    const currentUser = SDK.Users.current();
+    SDK.User.loadNav();
+    const currentUser = SDK.User.current();
 
     $(".page-header").html(`
     <h1>Hi, ${currentUser.firstName} ${currentUser.lastName}</h1>

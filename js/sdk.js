@@ -21,53 +21,55 @@ const SDK = {
 
     },
 
-    Users: {
+    User: {
+        findAll: (cb) => {
+            SDK.request({method: "GET", url: "/users"}, cb);
+        },
+        current: () => {
+            return SDK.Storage.load("users");
+        },
+        logOut: () => {
+            SDK.Storage.remove("tokenId");
+            SDK.Storage.remove("userId");
+            SDK.Storage.remove("user");
+            window.location.href = "login.html";
+        },
+        login: (email, password, cb) => {
+            SDK.request({
+                data: {
+                    email: email,
+                    password: password
+                },
+                url: "/auth",
+                method: "POST"
+            }, (err, data) => {
 
-        current:
-            () => {
-                return SDK.Storage.load("user");
-            },
+                //On login-error
+                if (err) return cb(err);
 
-        login:
-            (email, password, cb) => {
-                SDK.request({
-                    data: {
-                        email: email,
-                        password: password
-                    },
-                    url: "/auth",
-                    method: "POST"
-                }, (err, data) => {
+                localStorage.setItem("token", data);
 
-                    console.log(err, data);
 
-                    //On login-error
-                    if (err) return cb(err);
+                cb(null, data);
 
-                    localStorage.setItem("token", data);
-                    cb(null, data);
-                });
-            },
-        loadNav:
-            (cb) => {
-                $("#nav-container").load("nav.html", () => {
-                    const currentUser = SDK.Users.current();
-                    if (currentUser) {
-                        $(".navbar-right").html(`
-            <li><a href="my-page.html">startSide</a></li>
+            });
+        },
+        loadNav: (cb) => {
+            $("#nav-container").load("nav.html", () => {
+                const currentUser = SDK.User.current();
+                if (currentUser) {
+                    $(".navbar-right").html(`
+            <li><a href="home-page.html">Startside</a></li>
             <li><a href="#" id="logout-link">Logout</a></li>
           `);
-                    } else {
-                        $(".navbar-right").html(`
+                } else {
+                    $(".navbar-right").html(`
             <li><a href="login.html">Log-in <span class="sr-only">(current)</span></a></li>
           `);
-                    }
-                    $("#logout-link").click(() => SDK.Users.logOut());
-                    cb && cb();
-                });
-            }
-
-
+                }
+                $("#logout-link").click(() => SDK.User.logOut());
+                cb && cb();
+            });
+        }
     }
-
-};
+}
