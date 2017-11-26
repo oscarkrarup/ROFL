@@ -12,11 +12,18 @@ $(document).ready(() => {
                 $(".form-group").addClass("has-error");
             }
             else if (err) {
-                console.log("Bad stuff happened")
+                alert("Wrong e-mail or password")
             } else {
-                window.location.href = "events.html";
+                SDK.Users.loadNav();
+                window.location.href = "feed.html";
             }
-        });
+        })
+
+
+
+
+
+
 
     });
 });
