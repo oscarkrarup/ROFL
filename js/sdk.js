@@ -22,6 +22,24 @@ const SDK = {
     },
 
     User: {
+        createUser: (firstName,lastName, email, password, major,semester, gender, description, cb) =>
+            SDK.request({
+                data: {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    password: password,
+                    major: major,
+                    semester: semester,
+                    gender: gender,
+                    description: description
+
+                },
+                url: "/users",
+                method: "POST"
+            }, cb)
+    },
+
         findAll: (cb) => {
             SDK.request({method: "GET", url: "/users"}, cb);
         },
@@ -54,6 +72,7 @@ const SDK = {
 
             });
         },
+
         loadNav: (cb) => {
             $("#nav-container").load("nav.html", () => {
                 const currentUser = SDK.User.current();
@@ -72,4 +91,4 @@ const SDK = {
             });
         }
     }
-}
+
