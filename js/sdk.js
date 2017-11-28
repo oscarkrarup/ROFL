@@ -28,7 +28,7 @@ const SDK = {
         },
 
         current: () => {
-            return SDK.Storage.load("userId");
+            return localStorage.getItem("userId");
         },
 
         login: (email, password, cb) => {
@@ -101,6 +101,7 @@ const SDK = {
             cb && cb();
         });
     },
+
     Storage: {
         prefix: "BookStoreSDK",
         persist: (key, value) => {
@@ -120,11 +121,6 @@ const SDK = {
         }
     }
 };
-
-
-
-
-
 
     //Event: {
          //showEvents: (cb) => {

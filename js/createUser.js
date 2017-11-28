@@ -2,7 +2,8 @@ $(document).ready(() => {
 
     SDK.loadNav();
 
-    $("#createUser-button").click(() => {
+    $("#createUser-button").click((e) => {
+        e.preventDefault();
 
         const firstName = $("#inputFirstName").val();
         const lastName = $("#inputLastName").val();
@@ -17,7 +18,7 @@ $(document).ready(() => {
             console.log(err, data);
 
             if (err) {
-                alert("Something went wrong");
+                return "failure";
             }
         });
 
@@ -32,8 +33,9 @@ $(document).ready(() => {
             alert("Please Fill All Required Fields");
 
         } else {
-            //alert("User Created");
+            window.alert("User Created");
             window.location.href = "feed.html";
+
         }
 
     });
