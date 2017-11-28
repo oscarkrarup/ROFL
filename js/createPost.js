@@ -1,3 +1,3 @@
 $(document).ready(() => {
-    SDK.User.loadNav();
+    SDK.loadNav();
 });

@@ -1,6 +1,6 @@
 $(document).ready(() => {
 
-    SDK.User.loadNav();
+    SDK.loadNav();
     const currentUser = SDK.User.current();
 
     $(".page-header").html(`

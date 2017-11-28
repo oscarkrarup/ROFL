@@ -22,7 +22,45 @@ const SDK = {
     },
 
     User: {
-        createUser: (firstName,lastName, email, password, major,semester, gender, description, cb) =>
+
+        findAll: (cb) => {
+            SDK.request({method: "GET", url: "/users"}, cb);
+        },
+
+        current: () => {
+            return SDK.Storage.load("userId");
+        },
+
+        login: (email, password, cb) => {
+            SDK.request({
+                data: {
+                    email: email,
+                    password: password
+                },
+                url: "/auth",
+                method: "POST"
+            }, (err, data) => {
+
+                //On login-error
+                if (err) return cb(err);
+
+                localStorage.setItem("token", data)
+
+                //decode token
+                let token = data;
+
+                var base64Url = token.split('.')[0];
+                var base64 = base64Url.replace('-', '+').replace('_', '/');
+                console.log(JSON.parse(window.atob(base64)));
+
+                localStorage.setItem("userId", JSON.parse(window.atob(base64)).kid);
+                localStorage.setItem("token", data);
+
+                cb(null, data);
+            }, cb);
+        },
+
+        createUser: (firstName, lastName, email, password, major, semester, gender, description, cb) =>
             SDK.request({
                 data: {
                     firstName: firstName,
@@ -40,55 +78,62 @@ const SDK = {
             }, cb)
     },
 
-        findAll: (cb) => {
-            SDK.request({method: "GET", url: "/users"}, cb);
-        },
-        current: () => {
-            return SDK.Storage.load("users");
-        },
-        logOut: () => {
-            SDK.Storage.remove("tokenId");
-            SDK.Storage.remove("userId");
-            SDK.Storage.remove("user");
-            window.location.href = "login.html";
-        },
-        login: (email, password, cb) => {
-            SDK.request({
-                data: {
-                    email: email,
-                    password: password
-                },
-                url: "/auth",
-                method: "POST"
-            }, (err, data) => {
+    logOut: () => {
+        SDK.Storage.remove("tokenId");
+        SDK.Storage.remove("userId");
+        SDK.Storage.remove("user");
+        window.location.href = "login.html";
+    },
 
-                //On login-error
-                if (err) return cb(err);
-
-                localStorage.setItem("token", data);
-
-
-                cb(null, data);
-
-            });
-        },
-
-        loadNav: (cb) => {
-            $("#nav-container").load("nav.html", () => {
-                const currentUser = SDK.User.current();
-                if (currentUser) {
-                    $(".navbar-right").html(`
-            <li><a href="home-page.html">Startside</a></li>
-            <li><a href="#" id="logout-link">Logout</a></li>
+    loadNav: (cb) => {
+        $("#nav-container").load("nav.html", () => {
+            const currentUser = SDK.User.current();
+            if (currentUser) {
+                $(".navbar-right").html(`
+           <li><a href="#" id="logout-link">Logout</a></li>
           `);
-                } else {
-                    $(".navbar-right").html(`
+            } else {
+                $(".navbar-right").html(`
             <li><a href="login.html">Log-in <span class="sr-only">(current)</span></a></li>
           `);
-                }
-                $("#logout-link").click(() => SDK.User.logOut());
-                cb && cb();
-            });
+            }
+            $("#logout-link").click(() => SDK.User.logOut());
+            cb && cb();
+        });
+    },
+    Storage: {
+        prefix: "BookStoreSDK",
+        persist: (key, value) => {
+            window.localStorage.setItem(SDK.Storage.prefix + key, (typeof value === 'object') ? JSON.stringify(value) : value)
+        },
+        load: (key) => {
+            const val = window.localStorage.getItem(SDK.Storage.prefix + key);
+            try {
+                return JSON.parse(val);
+            }
+            catch (e) {
+                return val;
+            }
+        },
+        remove: (key) => {
+            window.localStorage.removeItem(SDK.Storage.prefix + key);
         }
     }
+};
 
+
+
+
+
+
+    //Event: {
+         //showEvents: (cb) => {
+        //createEvents: (cb) => {
+
+
+    //Post: {
+        //showPosts (cb): => {
+        //createPosts (cb): => {
+        //createComment(cb): => {
+
+    //Storage: {
