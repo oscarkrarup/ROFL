@@ -34,7 +34,7 @@ $(document).ready(() => {
 
         } else {
             window.alert("User Created");
-            window.location.href = "feed.html";
+            window.location.href = "../events.html";
 
         }
 

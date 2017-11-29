@@ -90,11 +90,7 @@ const SDK = {
             const currentUser = SDK.User.current();
             if (currentUser) {
                 $(".navbar-right").html(`
-           <li><a href="#" id="logout-link">Logout</a></li>
-          `);
-            } else {
-                $(".navbar-right").html(`
-            <li><a href="login.html">Log-in <span class="sr-only">(current)</span></a></li>
+           <li><a href="login.html" id="logout-link">Logout</a></li>
           `);
             }
             $("#logout-link").click(() => SDK.User.logOut());
@@ -119,8 +115,40 @@ const SDK = {
         remove: (key) => {
             window.localStorage.removeItem(SDK.Storage.prefix + key);
         }
-    }
-};
+    },
+
+    Event: {
+        showEvents: (cb) => {
+            SDK.request({
+                method: "GET",
+                url: "/events",
+                headers: {
+                    Authorization: "Bearer " + SDK.Storage.load("token")
+                }
+
+            }, cb)
+        }
+    },
+
+        createEvent: (owner_Id, title, startDate, endDate, description, cb) => {
+            SDK.request({
+                data:{
+                    owner_Id: owner_Id,
+                    title: title,
+                    startDate: startDate,
+                    endDate: endDate,
+                    description: description
+                },
+                method: "POST",
+                url: "/events",
+                headers: {
+                    Authorization: "Bearer " + SDK.Storage.load("token")
+                }
+            }, cb)
+        }
+
+
+    };
 
     //Event: {
          //showEvents: (cb) => {
@@ -132,4 +160,4 @@ const SDK = {
         //createPosts (cb): => {
         //createComment(cb): => {
 
-    //Storage: {
+

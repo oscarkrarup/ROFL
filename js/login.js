@@ -14,7 +14,7 @@ $(document).ready(() => {
             else if (err){
                 console.log("Fejl")
             } else {
-                window.location.href = "feed.html";
+                window.location.href = "events.html";
             }
         });
 
