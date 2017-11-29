@@ -127,13 +127,12 @@ const SDK = {
                 }
 
             }, cb)
-        }
-    },
+        },
 
-        createEvent: (owner_Id, title, startDate, endDate, description, cb) => {
+        createEvent: (owner_id, title, startDate, endDate, description, cb) => {
             SDK.request({
-                data:{
-                    owner_Id: owner_Id,
+                data: {
+                    owner_id: owner_id,
                     title: title,
                     startDate: startDate,
                     endDate: endDate,
@@ -148,16 +147,17 @@ const SDK = {
         }
 
 
-    };
+    }
+};
 
-    //Event: {
-         //showEvents: (cb) => {
-        //createEvents: (cb) => {
+//Event: {
+//showEvents: (cb) => {
+//createEvents: (cb) => {
 
 
-    //Post: {
-        //showPosts (cb): => {
-        //createPosts (cb): => {
-        //createComment(cb): => {
+//Post: {
+//showPosts (cb): => {
+//createPosts (cb): => {
+//createComment(cb): => {
 
 

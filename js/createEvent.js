@@ -1,14 +1,16 @@
 $(document).ready(() => {
     SDK.loadNav();
 
-    $("#createEvent-button").click(() => {
+    $("#createEvent-button").click((e) => {
+        e.preventDefault();
+
         const owner_id = SDK.User.current();
         const title = $("#inputTitle").val();
         const startDate = $("#inputStartDate").val();
         const endDate = $("#inputEndDate").val();
         const description = $("#inputDescription").val();
 
-        SDK.Event.createEvent(owner_id, title,startDate,endDate,description, (err, data) => {
+        SDK.Event.createEvent(owner_id, title, startDate, endDate, description, (err, data) => {
         console.log(err, data);
 
         if (err) {
@@ -21,9 +23,10 @@ $(document).ready(() => {
         !endDate ||
         !description) {
         alert("Please Fill All Required Fields");
-
-    } else {
-        window.alert("Event Created")
+        }
+        else {
+        window.alert("Event Created");
+        window.location.href="events.html";
     }
     });
 });
