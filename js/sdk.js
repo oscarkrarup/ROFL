@@ -78,7 +78,7 @@ const SDK = {
             }, cb)
     },
 
-    logOut: () => {
+        logOut: () => {
         SDK.Storage.remove("tokenId");
         SDK.Storage.remove("userId");
         SDK.Storage.remove("user");
@@ -147,12 +147,24 @@ const SDK = {
         }
 
 
-    }
+    },
+    Post: {
+        showPosts: (cb)=>{
+    SDK.request({
+
+        method: "GET",
+        url: "/posts",
+        headers: {
+            Authorization: "Bearer " + SDK.Storage.load("token")
+        }
+
+    }, cb)
+}
+}
 };
 
 //Event: {
-//showEvents: (cb) => {
-//createEvents: (cb) => {
+//flere?: (cb) => {
 
 
 //Post: {

@@ -8,10 +8,10 @@ $(document).ready(() => {
             const eventsHTML =`
                 <tr>
                 <td>${event.title}</td>
-                <td>${event.created}</td>
+                <td>${event.description}</td>
                 <td>${event.startDate}</td>
                 <td>${event.endDate}</td>
-                <td>${event.description}</td>
+                <td>${event.created}</td>
                 `;
 
             $eventTable.append(eventsHTML)
