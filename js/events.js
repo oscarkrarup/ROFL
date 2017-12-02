@@ -12,6 +12,7 @@ $(document).ready(() => {
                 <td>${event.startDate}</td>
                 <td>${event.endDate}</td>
                 <td>${event.created}</td>
+                </tr>
                 `;
 
             $eventTable.append(eventsHTML)

@@ -159,7 +159,22 @@ const SDK = {
         }
 
     }, cb)
-}
+},
+        createPost: (owner, content, cb)=>{
+            SDK.request({
+                data: {
+                    owner: owner,
+                    content: content
+                },
+                method: "POST",
+                url: "/posts",
+                headers: {
+                    Authorization: "Bearer" + SDK.Storage.load("token")
+
+                }
+            }, cb)
+
+                }
 }
 };
 

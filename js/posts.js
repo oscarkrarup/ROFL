@@ -2,14 +2,15 @@ $(document).ready(() => {
     SDK.loadNav();
     const $postTable = $("#postTable");
 
-    SDK.Post.showPosts((err, events) =>{
+    SDK.Post.showPosts((err, posts) =>{
 
-        events.forEach((event) =>{
+        posts.forEach((post) =>{
             const postsHTML =`
                 <tr>
-                <td>${event.owner_id}</td>
-                <td>${event.content}</td>
-                <td>${event.created}</td>
+                <td>${post.owner_id}</td>
+                <td>${post.content}</td>
+                <td>${post.created}</td>
+                </tr>
                 `;
 
             $postTable.append(postsHTML)
