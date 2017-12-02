@@ -23,8 +23,16 @@ const SDK = {
 
     User: {
 
-        findAll: (cb) => {
-            SDK.request({method: "GET", url: "/users"}, cb);
+        showUsers: (cb) => {
+            SDK.request({
+
+                method: "GET",
+                url: "/users",
+                headers: {
+                    Authorization: "Bearer " + SDK.Storage.load("token")
+                }
+
+                },cb)
         },
 
         current: () => {

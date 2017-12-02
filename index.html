@@ -9,27 +9,29 @@
     <title>Cafe Nexus</title>
 
 </head>
+
 <body>
 
 <div class="container">
+    <div class="row" id="nav-container"></div>
+
+    <div class="row">
+        <div class="col-lg-9">
 
 
     <div class="row">
         <div class="col-lg-12">
             <div class="jumbotron">
-                <h1 class="display-3">Cafe Nexus</h1>
-                <p class="lead">Velkommen til Cafe Nexus Social!</p>
+                <h1 class="display-3">Welcome to Nexus Social</h1>
                 <hr class="my-4">
-                <p>Cafe Nexus Social er en social platform for CBS' café. Her kan du oprette events og opslag vedrørende Cafe Nexus!</p>
-                <p class="lead">
-                    <a class="btn btn-primary btn-createUser" href="#" role="button">Opret bruger</a>
-                    <a class="btn btn-primary btn-login" href="#" role="button">Login</a>
-                </p>
+                <p>Nexus Social is a social platform for CBS' own café. Here you can create events or posts about Cafe Nexus!</p>
+
             </div>
 
         </div>
     </div>
 </div>
+    </div>
 
 <footer class="footer">
     <div class="container">
@@ -40,9 +42,10 @@
 <script src="lib/js/jquery-3.2.1.js"></script>
 <script src="lib/js/bootstrap.js"></script>
 <script src="js/sdk.js"></script>
-<script>
-    SDK.User.loadNav();
-</script>
+<script src="js/index.js"></script>
+    <script>
+        SDK.loadNav();
+    </script>
 
 </body>
 </html>
