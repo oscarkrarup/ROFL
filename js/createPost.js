@@ -20,7 +20,7 @@ $(document).ready(() => {
         }
         else {
             window.alert("Post Created");
-            window.location.href="posts.html";
-        }
+                window.location.href="posts.html";
+            }
     });
 });

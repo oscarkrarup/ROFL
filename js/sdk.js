@@ -107,7 +107,7 @@ const SDK = {
     },
 
     Storage: {
-        prefix: "BookStoreSDK",
+        prefix: "RoflSDK",
         persist: (key, value) => {
             window.localStorage.setItem(SDK.Storage.prefix + key, (typeof value === 'object') ? JSON.stringify(value) : value)
         },
@@ -152,13 +152,21 @@ const SDK = {
                     Authorization: "Bearer " + SDK.Storage.load("token")
                 }
             }, cb)
+        },
+        specificEvent: (cb) => {
+            SDK.request({
+                method:"GET",
+                url: "/events/" + SDK.Storage.load("eventId")
+            }, cb)
+
         }
+
 
 
     },
     Post: {
         showPosts: (cb)=>{
-    SDK.request({
+        SDK.request({
 
         method: "GET",
         url: "/posts",
@@ -186,13 +194,11 @@ const SDK = {
 }
 };
 
-//Event: {
-//flere?: (cb) => {
+
 
 
 //Post: {
-//showPosts (cb): => {
-//createPosts (cb): => {
+
 //createComment(cb): => {
 
 

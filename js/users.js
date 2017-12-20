@@ -2,7 +2,6 @@ $(document).ready(() => {
     SDK.loadNav();
     const $userTable = $("#userTable")
 
-
     SDK.User.showUsers((err, users) =>{
 
         users.forEach((user) =>{
@@ -15,7 +14,7 @@ $(document).ready(() => {
                 <td>${user.semester}</td>
                 </tr>
                 `;
-            
+
             $userTable.append(userHTML)
 
         });

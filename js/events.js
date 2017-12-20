@@ -12,11 +12,20 @@ $(document).ready(() => {
                 <td>${event.startDate}</td>
                 <td>${event.endDate}</td>
                 <td>${event.created}</td>
+                <td><button type="button" id="specificEvent-button" data-event-id="${event.id}">Go to Event</button></td>
+                
                 </tr>
                 `;
 
             $eventTable.append(eventsHTML)
             
         });
+        $("#specificEvent-button").click(() => {
+            window.location.href = "specificEvent.html";
+
+        });
     });
+
+
+
 });
